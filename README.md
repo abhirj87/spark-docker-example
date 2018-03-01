@@ -27,31 +27,31 @@ Eg:
     
 ./src/main/resources/run.sh is the shell script which builds the docker image from the Dockerfile availabel in the root of the project folder. 
 
-Eg:
-$./src/main/resources/run.sh
+    Eg:
+        $./src/main/resources/run.sh
 
-Sending build context to Docker daemon  543.7MB
-Step 1/13 : FROM p7hb/docker-spark:2.1.0
- ---> 0f1469d4cf27
-Step 2/13 : MAINTAINER Abhiram Iyenger <abhirj87@gmail.com>
- ---> Using cache
-.
-.
-Step 13/13 : CMD /bin/bash
- ---> Running in b1c7eb78947c
- ---> 4cad8e4de9da
-Removing intermediate container b1c7eb78947c
-18/03/01 20:44:05 INFO SparkContext: Running Spark version 2.1.0
-18/03/01 20:44:05 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-18/03/01 20:44:05 INFO SecurityManager: Changing view acls to: root
-18/03/01 20:44:05 INFO SecurityManager: Changing modify acls to: root
-18/03/01 20:44:05 INFO SecurityManager: Changing view acls groups to: 
-18/03/01 20:44:05 INFO SecurityManager: Changing modify acls groups to: 
-18/03/01 20:44:05 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
-18/03/01 20:44:06 INFO Utils: Successfully started service 'sparkDriver' on port 35939.
-.
-.
-.
+        Sending build context to Docker daemon  543.7MB
+        Step 1/13 : FROM p7hb/docker-spark:2.1.0
+         ---> 0f1469d4cf27
+        Step 2/13 : MAINTAINER Abhiram Iyenger <abhirj87@gmail.com>
+         ---> Using cache
+        .
+        .
+        Step 13/13 : CMD /bin/bash
+         ---> Running in b1c7eb78947c
+         ---> 4cad8e4de9da
+        Removing intermediate container b1c7eb78947c
+        18/03/01 20:44:05 INFO SparkContext: Running Spark version 2.1.0
+        18/03/01 20:44:05 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+        18/03/01 20:44:05 INFO SecurityManager: Changing view acls to: root
+        18/03/01 20:44:05 INFO SecurityManager: Changing modify acls to: root
+        18/03/01 20:44:05 INFO SecurityManager: Changing view acls groups to: 
+        18/03/01 20:44:05 INFO SecurityManager: Changing modify acls groups to: 
+        18/03/01 20:44:05 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+        18/03/01 20:44:06 INFO Utils: Successfully started service 'sparkDriver' on port 35939.
+        .
+        .
+        .
 <h3>validation of results</h3>
 Once the program completes randomly data is checked and verfied by running wc -l command against the source.
 If the counts are not matching then with will be notified on screen.
