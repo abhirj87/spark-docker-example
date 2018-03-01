@@ -20,14 +20,14 @@ mvn spring-boot:run
 
 <h4>Examples:</h4> 
 
-<h4>Ex 1:<h4>Getting address via POST(sending the json via request body)
+<h4>Ex 1:</h4>Getting address via POST(sending the json via request body)
 localhost:8001/geolocation/latlng/ { "lat" : 33.969601, "lng" : -84.100033 }
 
 <h4>Response:</h4>
 
 { "latLng":{"lat":33.969601,"lng":-84.100033}, "geocodingAddress":"2651 Satellite Blvd, Duluth, GA 30096, USA", "timeOfrequest":"Tue Jan 24 23:42:32 EST 2017" }
 
-<h4>Ex 2:<h4> Getting address via GET
+<h4>Ex 2:</h4> Getting address via GET
 http://localhost:8001/geolocation/latlng/40.714224,-73.961452
 
 <h4>Response:</h4> {"latLng":{"lat":33.969601,"lng":-84.100033},"geocodingAddress":"2651 Satellite Blvd, Duluth, GA 30096, USA","timeOfrequest":"Tue Jan 24 23:42:32 EST 2017"}
