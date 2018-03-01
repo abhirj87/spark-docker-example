@@ -54,6 +54,7 @@ Maven 3 or later
         .
         .
 <h3>Validation of results</h3>
+
 Once the program completes, randomly data is checked and verfied by running wc -l command against the source.
 If the counts are not matching then it will be notified on screen.
 
