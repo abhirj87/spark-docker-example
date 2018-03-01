@@ -12,10 +12,10 @@ Maven 3 or later
 
 <h3>Usage</h3>
 <ul>
-    <li>1. Build the application with: mvn clean install</li>
-<li>2. Once the application is built, triggering run.sh in the main/resources will launch the application.</li>
-<li>3. start_job.sh shell script available in the main/resources folder will contain the command that starts the spark job  once the docker container is up. This script will be copied from main/resources to the container in the previous step. Make sure that this script is run from the root of the project like shown below.</li>
-<li>4. The Spark job takes 5 arguments. If the number of arguments are not 5 then usage will be displayed. If it is started without any arguments then a sample dataset stored in the project will be run for demonstration purposes.</li>
+    <li>Build the application with: mvn clean install</li>
+<li>Once the application is built, triggering run.sh in the main/resources will launch the application.</li>
+<li>start_job.sh shell script available in the main/resources folder will contain the command that starts the spark job  once the docker container is up. This script will be copied from main/resources to the container in the previous step. Make sure that this script is run from the root of the project like shown below.</li>
+<li>The Spark job takes 5 arguments. If the number of arguments are not 5 then usage will be displayed. If it is started without any arguments then a sample dataset stored in the project will be run for demonstration purposes.</li>
 </ul>
 <p>Eg: </p>
 
