@@ -25,7 +25,7 @@ public class AccessLogProcessor {
     }
 
     public static void runDriver(String[] args){
-        String inputDataPath = "data/sample_data.txt";
+        String inputDataPath = "/Users/aiyenger/Downloads/docker/spark-2/NASA_access_log_Jul95";
         String outputTableOrPath = "topn_results";
         String master = "local";
         int noOfPartitions = 5;
@@ -48,6 +48,7 @@ public class AccessLogProcessor {
         } else {
             log.log(java.util.logging.Level.WARNING, "Invalid input parameters!!");
             log.log(java.util.logging.Level.WARNING, "Usage: inputDataPath outputTableOrPath master noOfPartitions topN");
+            System.exit(1);
         }
 
 

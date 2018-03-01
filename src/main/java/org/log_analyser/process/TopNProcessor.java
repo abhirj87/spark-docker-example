@@ -15,6 +15,7 @@ import scala.Tuple2;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * author: abhirj87
@@ -39,7 +40,8 @@ public class TopNProcessor implements Serializable {
 
         long l1 = System.currentTimeMillis();
 
-        Dataset<Row> logData = spark.createDataFrame(data, LogData.class);
+        Dataset<Row> logData = spark.createDataFrame(data
+                .filter(x -> (x != null && x.getIpAddress()!= null && x.getLogDate()!= null )), LogData.class);
         logData.select("ipAddress", "logDate").groupBy("ipAddress", "logDate")
                 .count()
                 .registerTempTable(" url_counts");
@@ -68,57 +70,61 @@ public class TopNProcessor implements Serializable {
 
 
         long l1 = System.currentTimeMillis();
-        data.mapToPair(x -> new Tuple2<>(x.getLogDate() + "," + x.getIpAddress(), 1))
+        if(data!= null) {
+            data.filter(x -> (x != null && x.getIpAddress()!= null && x.getLogDate()!= null ))
+                    .mapToPair(x -> new Tuple2<>(x.getLogDate() + "," + x.getIpAddress(), 1))
                 /*
                 (28/Jul/1995,slip005.hol.nl,1)+(28/Jul/1995,slip005.hol.nl,1)+(28/Jul/1995,slip005.hol.nl,1)
                 ==> (key: [28/Jul/1995,slip005.hol.nl],value: 3)
 
                  */
-                .reduceByKey((x, y) -> x + y)
+                    .reduceByKey((x, y) -> x + y)
                  /*
                     now Key changed: (Key: 28/Jul/1995, value: [slip005.hol.nl,3])
                   */
-                .mapToPair(x -> new Tuple2<>(x._1().split(",")[0], x._1().split(",")[1] + "," + x._2()))
-                .groupByKey()
+                    .mapToPair(x -> new Tuple2<>(x._1().split(",")[0], x._1().split(",")[1] + "," + x._2()))
+                    .groupByKey()
                 /*
                    this make the data look like so:
                    (Key: 28/Jul/1995, [value1: [slip005.hol.nl,3],value2: [slip005.hol.dd,8],value3: [slip005.eee,3]])
                  */
-                .map(x -> {
-                    List<String> values = Lists.newArrayList(x._2());
+                    .map(x -> {
+                        List<String> values = Lists.newArrayList(x._2());
                     /*
                        Sorting the groupings:
                        Extract the counts and compare it
                      */
-                    values.sort(new Comparator() {
-                        @Override
-                        public int compare(Object o1, Object o2) {
-                            int v1 = Utils.getUtils().parseInt(((String) o1).split(",")[1]);
-                            int v2 = Utils.getUtils().parseInt(((String) o2).split(",")[1]);
+                        values.sort(new Comparator() {
+                            @Override
+                            public int compare(Object o1, Object o2) {
+                                int v1 = Utils.getUtils().parseInt(((String) o1).split(",")[1]);
+                                int v2 = Utils.getUtils().parseInt(((String) o2).split(",")[1]);
 
-                            return v2 - v1;
-                        }
-                    });
+                                return v2 - v1;
+                            }
+                        });
 
                     /*
                     Cut the list to topN visitors
                      */
 
-                    int size = values.size();
-                    for (int i = size - 1; i >= topN; i--) {
-                        values.remove(i);
-                    }
-                    return new Tuple2<String, Iterable<String>>(x._1(), (Iterable) values);
+                        int size = values.size();
+                        for (int i = size - 1; i >= topN; i--) {
+                            values.remove(i);
+                        }
+                        return new Tuple2<String, Iterable<String>>(x._1(), (Iterable) values);
 
-                })
-                .flatMap((FlatMapFunction<Tuple2<String, Iterable<String>>, String>)
-                        stringIterableTuple2 -> {
-                            List<String> l = new ArrayList();
-                            stringIterableTuple2._2.forEach(y -> l.add(stringIterableTuple2._1() + "," + y));
-                            return l.iterator();
-                        })
-                .saveAsTextFile(outputTableName);
-
+                    })
+                    .flatMap((FlatMapFunction<Tuple2<String, Iterable<String>>, String>)
+                            stringIterableTuple2 -> {
+                                List<String> l = new ArrayList();
+                                stringIterableTuple2._2.forEach(y -> l.add(stringIterableTuple2._1() + "," + y));
+                                return l.iterator();
+                            })
+                    .saveAsTextFile(outputTableName);
+        } else{
+            log.log(Level.SEVERE,"No data present in the RDD: "+data);
+        }
 
         log.info("Output result available in the table: " + outputTableName);
         long l2 = System.currentTimeMillis();
