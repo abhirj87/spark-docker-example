@@ -1,9 +1,9 @@
 <h2>Spark-Docker Application</h2>
 <h3>Description</h3>
-This is a Spark application that downloads the dataset at ftp://ita.ee.lbl.gov/traces/NASA_access_log_Jul95.gz and uses Apache Spark to determine the top-n most frequent visitors and urls for each day of the trace. The java application packaged with a dockerized apache spark run in a containerized environment. 
+This is a Spark application that downloads the dataset at ftp://ita.ee.lbl.gov/traces/NASA_access_log_Jul95.gz and uses Apache Spark to determine the top-n most frequent visitors and urls for each day of the trace. The java application is packaged with a "Dockerized Apache Spark" run in a containerized environment. 
 
 For the dockerized spark image I have used the p7hb/docker-spark:2.1.0 as my base image. The detailed documentation is in the link below:
-https://github.com/P7h/docker-spark
+<p>https://github.com/P7h/docker-spark</p>
 
 
 <h3>Requirements</h3>
@@ -11,12 +11,13 @@ Java 1.8 or later.
 Maven 3 or later
 
 <h3>Usage</h3>
-1. Build the application with: mvn clean install
-2. Once the application is build triggering run.sh in the main/resources will launch the application.
-3. start_job.sh shell script available in the main/resources folder will contain the command that starts the spark job  once the docker container is up. This script will be copied from main/resources to the container in the previous step. Make sure that this script is run from the root of thr project like shown below.
-4. The Spark job takes 5 arguments. If the number of arguments are not 5 then usage will be displayed.If it is started without any arguments then a sample dataset stored in the project will be run for demonstartion purposes.
-
-Eg: 
+<ul>
+    <li>1. Build the application with: mvn clean install</li>
+<li>2. Once the application is built, triggering run.sh in the main/resources will launch the application.</li>
+<li>3. start_job.sh shell script available in the main/resources folder will contain the command that starts the spark job  once the docker container is up. This script will be copied from main/resources to the container in the previous step. Make sure that this script is run from the root of the project like shown below.</li>
+<li>4. The Spark job takes 5 arguments. If the number of arguments are not 5 then usage will be displayed. If it is started without any arguments then a sample dataset stored in the project will be run for demonstration purposes.</li>
+</ul>
+<p>Eg: </p>
 
     spark-submit --class org.log_analyser.AccessLogProcessor --master spark://spark:7077 top_n_processor-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
     input \#input dir where the data is downloaded
@@ -25,7 +26,7 @@ Eg:
     5 \ #number of partition 
     3 # this is the N in topN. Say if N=3 then for each day we will have top 3 visitors displayed
     
-./src/main/resources/run.sh is the shell script which builds the docker image from the Dockerfile availabel in the root of the project folder. 
+./src/main/resources/run.sh is the shell script which builds the docker image from the Dockerfile available in the root of the project folder. 
 
     Eg:
         $./src/main/resources/run.sh
@@ -52,7 +53,7 @@ Eg:
         .
         .
         .
-<h3>validation of results</h3>
-Once the program completes randomly data is checked and verfied by running wc -l command against the source.
-If the counts are not matching then with will be notified on screen.
+<h3>Validation of results</h3>
+Once the program completes, randomly data is checked and verfied by running wc -l command against the source.
+If the counts are not matching then it will be notified on screen.
 
