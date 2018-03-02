@@ -53,12 +53,42 @@ Maven 3 or later
         .
         .
         .
+<h3>Output</h3>
+
+output_data dir will have the out of the run.
+It is a csv file. Contents can be read as date, visitor url and visits per day. For each each date the no of visits will be in decending order.
+
+ 
+    Eg: cat output_data/* | more
+    18/Jul/1995,siltb10.orl.mmc.com,518
+    18/Jul/1995,piweba3y.prodigy.com,459
+    18/Jul/1995,piweba4y.prodigy.com,403
+    28/Jul/1995,pcmas.it.bton.ac.uk,353
+    28/Jul/1995,poppy.hensa.ac.uk,203
+    28/Jul/1995,edams.ksc.nasa.gov,177
+    05/Jul/1995,news.ti.com,826
+    05/Jul/1995,piweba3y.prodigy.com,664
+    05/Jul/1995,alyssa.prodigy.com,473
+    11/Jul/1995,bill.ksc.nasa.gov,1394
+    11/Jul/1995,indy.gradient.com,969
+    11/Jul/1995,marina.cea.berkeley.edu,612
+    21/Jul/1995,siltb10.orl.mmc.com,1354
+    21/Jul/1995,vagrant.vf.mmc.com,665
+    21/Jul/1995,piweba3y.prodigy.com,464
+    06/Jul/1995,piweba3y.prodigy.com,732
+    06/Jul/1995,alyssa.prodigy.com,682
+
+
+
 <h3>Validation of results</h3>
 
-Once the program completes, randomly data is checked and verfied by running wc -l command against the source.
+
+Validation works as below:
+Once the program completes, randomly data is checked and verfied by running wc -l command against the input file source.
 If the counts are not matching then it will be notified on screen.
 After validation it will leave us in the Spark container so that if we can recheck the results.
 Do a exit to come out of the container.
+
 
 
     Eg: Happy Path:
