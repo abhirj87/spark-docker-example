@@ -108,7 +108,7 @@ Do an exit to come out of the container.
     
 <h3>Want to check output in Zeppelin Notebook like so?</h3>
 Pull the zeppelin branch. It automatically starts the zeppelin daemon in the background upon boot up.
-http://localhost:4040/ use this url to bring up the notbook on browser. Open a spark interpreter and copy paste the following code snippet to view the results accordingly.
+<b>http://localhost:4040/</b> use this url to bring up the notbook on browser. Open a spark interpreter and copy paste the following code snippet to view the results accordingly.
 
 NOTE: building zeppelin on top of spark image takes a lot of time (15 to 20mins to build).
 
