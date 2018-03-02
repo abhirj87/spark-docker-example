@@ -10,6 +10,8 @@ For the dockerized spark image I have used the p7hb/docker-spark:2.1.0 as my bas
 <ul>
     <li>Java 1.8 or later.</li>
     <li>Maven 3 or later</li>
+    <li>docker version 1.12.6 or later</li>
+
 </ul>
 <h3>Usage</h3>
 <ul>
