@@ -10,6 +10,8 @@ For the dockerized spark image I have used the p7hb/docker-spark:2.1.0 as my bas
 <ul>
     <li>Java 1.8 or later.</li>
     <li>Maven 3 or later</li>
+    <li>docker version 1.12.6 or later</li>
+
 </ul>
 <h3>Usage</h3>
 <ul>
@@ -54,6 +56,7 @@ For the dockerized spark image I have used the p7hb/docker-spark:2.1.0 as my bas
         .
         .
         .
+        
 <h3>Output</h3>
 
 output_data dir will have the output of the run.
@@ -106,3 +109,54 @@ Do an exit to come out of the container.
     Validation failed!!"
     Validation failed!!"
     
+<h3>Approach</h3>
+<pre>
+TopNProcessor has all the logic. 
+findTopNBySql --> Method takes spark sql to solve this and stores reult as a hive table.
+findTopN --> Method solves this by transformations on JavaRDDs and writes to an output directory. </pre>
+       
+
+<h3>Want to check output in Zeppelin Notebook like so?</h3>
+Pull the zeppelin branch. It automatically starts the zeppelin daemon in the background upon boot up.
+<b>http://localhost:4040/</b> use this url to bring up the notbook on browser. Open a spark interpreter and copy paste the following code snippet to view the results accordingly.
+ 
+ <p align="center">
+    <img src="zepplin_image.png" width="350"/>
+ </p>
+
+NOTE: building zeppelin on top of spark image takes a lot of time (15 to 20mins to build).
+
+    val outputData = sc.textFile("/home/output_data/part-00005")
+
+    case class OutputData(date:String, url:String, count : Int)
+
+    // split each line, filter out header (starts with "age"), and map it into Bank case class  
+    val op = outputData.map(s=>s.split(",")).map(
+        s=>OutputData(s(0), 
+                s(1).replaceAll("\"", ""),
+                s(2).trim.toInt
+            )
+    )
+
+    // convert to DataFrame and create temporal table
+    op.toDF().registerTempTable("visitor_frequency")
+    op.toDF().show()
+
+        outputData: org.apache.spark.rdd.RDD[String] = /home/output_data/part-00005 MapPartitionsRDD[20] at textFile at <console>:27
+        defined class OutputData
+        op: org.apache.spark.rdd.RDD[OutputData] = MapPartitionsRDD[22] at map at <console>:33
+        warning: there was one deprecation warning; re-run with -deprecation for details
+        +-----------+--------------------+-----+
+        |       date|                 url|count|
+        +-----------+--------------------+-----+
+        |16/Jul/1995|piweba3y.prodigy.com| 1280|
+        |16/Jul/1995|piweba4y.prodigy.com| 1269|
+        |16/Jul/1995| siltb10.orl.mmc.com|  874|
+        |03/Jul/1995|piweba3y.prodigy.com| 1067|
+        |03/Jul/1995|       134.83.184.18|  413|
+        |03/Jul/1995|  alyssa.prodigy.com|  368|
+        |26/Jul/1995|piweba3y.prodigy.com|  312|
+        |26/Jul/1995|arctic.nad.northr...|  274|
+        |26/Jul/1995|piweba4y.prodigy.com|  265|
+        +-----------+--------------------+-----+
+ 
