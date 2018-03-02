@@ -22,7 +22,7 @@ RUN echo "cd /home ; mkdir -p input ; cp NASA_access_log_Jul95 input/" >> ~/.bas
 RUN echo "sh /home/start_job.sh" >> ~/.bashrc
 RUN echo "cp -rf /home/zeppelin-site.xml ${ZEPPELIN_HOME}/conf/" >> ~/.bashrc
 RUN echo "cp -rf /home/interpreter.json" ${ZEPPELIN_HOME}/conf/>> ~/.bashrc
-RUN echo "sh ${ZEPPELIN_HOME}/bin/zeppelin-daemon.sh start" >> ~/.bashrc
+RUN echo "cd ${ZEPPELIN_HOME} ; ./bin/zeppelin-daemon.sh start" >> ~/.bashrc
 RUN mkdir -p ${ZEPPELIN_HOME} && \
     curl ${DIST_MIRROR}/zeppelin-${VERSION}/zeppelin-${VERSION}-bin-all.tgz | tar xvz -C ${ZEPPELIN_HOME} && \
     mv ${ZEPPELIN_HOME}/zeppelin-${VERSION}-bin-all/* ${ZEPPELIN_HOME} && \
