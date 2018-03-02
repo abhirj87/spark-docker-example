@@ -55,8 +55,8 @@ Maven 3 or later
         .
 <h3>Output</h3>
 
-output_data dir will have the out of the run.
-It is a csv file. Contents can be read as date, visitor url and visits per day. For each each date the no of visits will be in decending order.
+output_data dir will have the output of the run.
+It is a csv file. Content can be read as date, visitor url and visits per day. For each each date the number of visits will be in descending order.
 
  
     Eg: cat output_data/* | more
@@ -86,8 +86,8 @@ It is a csv file. Contents can be read as date, visitor url and visits per day. 
 Validation works as below:
 Once the program completes, randomly data is checked and verfied by running wc -l command against the input file source.
 If the counts are not matching then it will be notified on screen.
-After validation it will leave us in the Spark container so that if we can recheck the results.
-Do a exit to come out of the container.
+After validation it will leave us in the Spark container so that we can recheck the results.
+Do an exit to come out of the container.
 
 
 
