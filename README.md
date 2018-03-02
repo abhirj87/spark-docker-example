@@ -119,6 +119,10 @@ findTopN --> Method solves this by transformations on JavaRDDs and writes to an 
 <h3>Want to check output in Zeppelin Notebook like so?</h3>
 Pull the zeppelin branch. It automatically starts the zeppelin daemon in the background upon boot up.
 <b>http://localhost:4040/</b> use this url to bring up the notbook on browser. Open a spark interpreter and copy paste the following code snippet to view the results accordingly.
+ 
+ <p align="center">
+    <img src="zepplin_image.png" width="350"/>
+ </p>
 
 NOTE: building zeppelin on top of spark image takes a lot of time (15 to 20mins to build).
 
@@ -155,3 +159,4 @@ NOTE: building zeppelin on top of spark image takes a lot of time (15 to 20mins 
         |26/Jul/1995|arctic.nad.northr...|  274|
         |26/Jul/1995|piweba4y.prodigy.com|  265|
         +-----------+--------------------+-----+
+ 
