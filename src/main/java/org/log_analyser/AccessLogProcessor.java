@@ -24,7 +24,7 @@ public class AccessLogProcessor {
         runDriver(args);
     }
 
-    public static void runDriver(String[] args){
+    public static void runDriver(String[] args) {
         String inputDataPath = "/Users/aiyenger/Downloads/docker/spark-2/NASA_access_log_Jul95";
         String outputTableOrPath = "topn_results";
         String master = "local";

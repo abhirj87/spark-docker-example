@@ -41,7 +41,7 @@ public class TopNProcessor implements Serializable {
         long l1 = System.currentTimeMillis();
 
         Dataset<Row> logData = spark.createDataFrame(data
-                .filter(x -> (x != null && x.getIpAddress()!= null && x.getLogDate()!= null )), LogData.class);
+                .filter(x -> (x != null && x.getIpAddress() != null && x.getLogDate() != null)), LogData.class);
         logData.select("ipAddress", "logDate").groupBy("ipAddress", "logDate")
                 .count()
                 .registerTempTable(" url_counts");
@@ -70,8 +70,8 @@ public class TopNProcessor implements Serializable {
 
 
         long l1 = System.currentTimeMillis();
-        if(data!= null) {
-            data.filter(x -> (x != null && x.getIpAddress()!= null && x.getLogDate()!= null ))
+        if (data != null) {
+            data.filter(x -> (x != null && x.getIpAddress() != null && x.getLogDate() != null))
                     .mapToPair(x -> new Tuple2<>(x.getLogDate() + "," + x.getIpAddress(), 1))
                 /*
                 (28/Jul/1995,slip005.hol.nl,1)+(28/Jul/1995,slip005.hol.nl,1)+(28/Jul/1995,slip005.hol.nl,1)
@@ -122,8 +122,8 @@ public class TopNProcessor implements Serializable {
                                 return l.iterator();
                             })
                     .saveAsTextFile(outputTableName);
-        } else{
-            log.log(Level.SEVERE,"No data present in the RDD: "+data);
+        } else {
+            log.log(Level.SEVERE, "No data present in the RDD: " + data);
         }
 
         log.info("Output result available in the table: " + outputTableName);

@@ -1,5 +1,6 @@
 #!/bin/bash
-
+#remove spark container if it exits
+docker rm spark
 FILE=target/NASA_access_log_Jul95
 if [ ! -f "$FILE" ]; then
    curl -O ftp://ita.ee.lbl.gov/traces/NASA_access_log_Jul95.gz

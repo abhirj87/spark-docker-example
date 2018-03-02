@@ -14,8 +14,8 @@ WORKDIR /home
 RUN echo "start-master.sh > /home/run.txt" >> ~/.bashrc
 RUN echo "start-slave.sh spark://spark:7077 > /home/run-slave.txt" >> ~/.bashrc
 # RUN echo "cd /home/ ; curl -O ftp://ita.ee.lbl.gov/traces/NASA_access_log_Jul95.gz" >>  ~/.bashrc
-RUN echo "gunzip NASA_access_log_Jul95.gz" >> ~/.bashrc
-RUN echo "cd /home ; mkdir input ; cp NASA_access_log_Jul95 input/" >> ~/.bashrc
+RUN echo "gunzip -f NASA_access_log_Jul95.gz" >> ~/.bashrc
+RUN echo "cd /home ; mkdir -p input ; cp NASA_access_log_Jul95 input/" >> ~/.bashrc
 RUN echo "sh /home/start_job.sh" >> ~/.bashrc
 # Expose ports for monitoring.
 # SparkContext web UI on 4040 -- only available for the duration of the application.

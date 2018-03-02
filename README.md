@@ -12,8 +12,8 @@ Maven 3 or later
 
 <h3>Usage</h3>
 <ul>
-    <li>Build the application with: mvn clean install</li>
-<li>Once the application is built, triggering run.sh in the main/resources will launch the application.</li>
+    <li>Build the application with: <b>mvn clean install</b></li>
+<li>Command[from root of the project]: <b>./src/main/resources/run.sh</b> Once the application is built, triggering <b>run.sh</b> in the main/resources will launch the application.</li>
 <li>start_job.sh shell script available in the main/resources folder will contain the command that starts the spark job  once the docker container is up. This script will be copied from main/resources to the container in the previous step. Make sure that this script is run from the root of the project like shown below.</li>
 <li>The Spark job takes 5 arguments. If the number of arguments are not 5 then usage will be displayed. If it is started without any arguments then a sample dataset stored in the project will be run for demonstration purposes.</li>
 </ul>
@@ -28,7 +28,7 @@ Maven 3 or later
     
 ./src/main/resources/run.sh is the shell script which builds the docker image from the Dockerfile available in the root of the project folder. 
 
-    Eg:
+    Eg: from the root of the project run the following
         $./src/main/resources/run.sh
 
         Sending build context to Docker daemon  543.7MB
@@ -57,4 +57,21 @@ Maven 3 or later
 
 Once the program completes, randomly data is checked and verfied by running wc -l command against the source.
 If the counts are not matching then it will be notified on screen.
+After validation it will leave us in the Spark container so that if we can recheck the results.
+Do a exit to come out of the container.
 
+
+    Eg: Happy Path:
+    Run Completed :) !!
+    Moment of Truth: Yes its time for validation!!
+    Matched!!! count from  wc command: 1199  count in o/p data: 1199
+    Matched!!! count from  wc command: 828  count in o/p data: 828
+    Matched!!! count from  wc command: 460  count in o/p data: 460
+    root@spark:/home# 
+    
+    Eg: When Validation fails
+    Validation failed!!" 222 500
+    Validation failed!!"
+    Validation failed!!"
+    Validation failed!!"
+    

@@ -9,6 +9,8 @@ spark://spark:7077 \
 5 \
 3
 
+echo "Run Completed :) !!"
+echo "Moment of Truth: Yes its time for validation!!"
 #
 #Following peice of code is to validate the output
 #
@@ -19,20 +21,16 @@ do
 dt=$(echo $ln | cut -d ',' -f1)
 ip=$(echo $ln | cut -d ',' -f2)
 count=$(echo $ln | cut -d ',' -f3)
-echo $ip $dt $count  all from the output
+#echo $ip $dt $count  all from the output
 var=$(echo $(cat $file | grep $dt | grep $ip | wc -l))
-echo $var == from the input
+#echo $var == from the input
 if [ $var -eq $count ]; then
-    echo "Matched!!!"
+    echo "Matched!!! count from  wc command: "$var " count in o/p data: "$count
 else
     echo "Validation failed!!" $var $count
     echo "Validation failed!!"
     echo "Validation failed!!"
     echo "Validation failed!!"
-    echo "Validation failed!!"
-    echo "Validation failed!!"
-    echo "Validation failed!!"
-    echo "Validation failed!!"
-    echo "Validation failed!!"
 fi
 done
+exit

@@ -42,7 +42,7 @@ public class DataParser {
             Class fieldType = field.getType();
             field.setAccessible(true);
             try {
-                getMethod(cl,field).invoke(entityObject, getData(parts[i++], fieldType));
+                getMethod(cl, field).invoke(entityObject, getData(parts[i++], fieldType));
             } catch (Exception e) {
                 log.log(Level.WARNING, className + " method ==> parse " + "exception while parsing field: " + field.getName() + "\n **Message: " + e.getMessage());
                 e.printStackTrace();
