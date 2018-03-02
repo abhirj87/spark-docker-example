@@ -10,6 +10,9 @@ spark://spark:7077 \
 3
 
 echo "Run Completed :) !!"
+echo "-------SAMPLE OUTPUT-----------"
+tail -n 5 output_data/*
+
 echo "Moment of Truth: Yes its time for validation!!"
 #
 #Following peice of code is to validate the output

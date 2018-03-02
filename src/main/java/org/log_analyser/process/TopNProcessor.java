@@ -49,12 +49,13 @@ public class TopNProcessor implements Serializable {
         /**
          * Splitting the sql query as rank function is not available in the above format
          */
-        Dataset<Row> result = spark.sql("select * from " +
-                "(select logDate,ipAddress," +
-                "count, Rank() over (partition by logDate Order by count desc) as rank " +
+        Dataset<Row> result = spark.sql("select logDate,ipAddress,count from " +
+                "(select logDate,ipAddress,count, Rank() over (partition by logDate Order by count desc) as rank " +
                 "from url_counts) " +
                 "where rank <= " + topN);
 
+        log.info("---------------------Result generated form spark sql---------------");
+        result.show();
         result.write().mode("overwrite").saveAsTable(outputTableName);
         log.info("Output result available in the table: " + outputTableName);
         long l2 = System.currentTimeMillis();
@@ -82,7 +83,8 @@ public class TopNProcessor implements Serializable {
                  /*
                     now Key changed: (Key: 28/Jul/1995, value: [slip005.hol.nl,3])
                   */
-                    .mapToPair(x -> new Tuple2<>(x._1().split(",")[0], x._1().split(",")[1] + "," + x._2()))
+                    .mapToPair(x ->
+                            new Tuple2<>(x._1().split(",")[0], x._1().split(",")[1] + "," + x._2()))
                     .groupByKey()
                 /*
                    this make the data look like so:
