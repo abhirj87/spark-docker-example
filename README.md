@@ -54,6 +54,7 @@ For the dockerized spark image I have used the p7hb/docker-spark:2.1.0 as my bas
         .
         .
         .
+        
 <h3>Output</h3>
 
 output_data dir will have the output of the run.
@@ -106,6 +107,12 @@ Do an exit to come out of the container.
     Validation failed!!"
     Validation failed!!"
     
+<h3>Approach</h3>
+TopNProcessor has all the logic. 
+findTopNBySql --> Method takes spark sql to solve this and stores reult as a hive table.
+findTopN --> Method solves this by transformations on JavaRDDs and writes to an output directory
+        
+
 <h3>Want to check output in Zeppelin Notebook like so?</h3>
 Pull the zeppelin branch. It automatically starts the zeppelin daemon in the background upon boot up.
 <b>http://localhost:4040/</b> use this url to bring up the notbook on browser. Open a spark interpreter and copy paste the following code snippet to view the results accordingly.
