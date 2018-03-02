@@ -108,10 +108,11 @@ Do an exit to come out of the container.
     Validation failed!!"
     
 <h3>Approach</h3>
+<pre>
 TopNProcessor has all the logic. 
 findTopNBySql --> Method takes spark sql to solve this and stores reult as a hive table.
-findTopN --> Method solves this by transformations on JavaRDDs and writes to an output directory
-        
+findTopN --> Method solves this by transformations on JavaRDDs and writes to an output directory. </pre>
+       
 
 <h3>Want to check output in Zeppelin Notebook like so?</h3>
 Pull the zeppelin branch. It automatically starts the zeppelin daemon in the background upon boot up.
