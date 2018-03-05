@@ -130,7 +130,6 @@ NOTE: building zeppelin on top of spark image takes a lot of time (15 to 20mins 
 
     case class OutputData(date:String, url:String, count : Int)
 
-    // split each line, filter out header (starts with "age"), and map it into Bank case class  
     val op = outputData.map(s=>s.split(",")).map(
         s=>OutputData(s(0), 
                 s(1).replaceAll("\"", ""),
@@ -142,7 +141,8 @@ NOTE: building zeppelin on top of spark image takes a lot of time (15 to 20mins 
     op.toDF().registerTempTable("visitor_frequency")
     op.toDF().show()
 
-        outputData: org.apache.spark.rdd.RDD[String] = /home/output_data/part-00005 MapPartitionsRDD[20] at textFile at <console>:27
+        Output: 
+        org.apache.spark.rdd.RDD[String] = /home/output_data/part-00005 MapPartitionsRDD[20] at textFile at <console>:27
         defined class OutputData
         op: org.apache.spark.rdd.RDD[OutputData] = MapPartitionsRDD[22] at map at <console>:33
         warning: there was one deprecation warning; re-run with -deprecation for details
