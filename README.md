@@ -141,7 +141,7 @@ NOTE: building zeppelin on top of spark image takes a lot of time (15 to 20mins 
     op.toDF().registerTempTable("visitor_frequency")
     op.toDF().show()
 
-        <b>output</b>: 
+        Output: 
         org.apache.spark.rdd.RDD[String] = /home/output_data/part-00005 MapPartitionsRDD[20] at textFile at <console>:27
         defined class OutputData
         op: org.apache.spark.rdd.RDD[OutputData] = MapPartitionsRDD[22] at map at <console>:33
